@@ -13,6 +13,7 @@ npm install --save y-leveldb [-g]
 ### Global installation (easy)
 * Install package `npm install -g y-websockets-server`
 * Execute binary `y-websockets-server [--port port] [--db db]` (defaults: port = 1234, db = `memory` (choose either `leveldb` or `memory`)).
+* Note: you can execute the binary file by running `npx y-websockets-server`
 
 Yjs uses [debug](https://github.com/visionmedia/debug) for logging. In order to
 turn on logging set the environment variable `DEBUG` to `y*,-y:connector-message`: I.e
