@@ -1,4 +1,5 @@
-# Websockets Connector for [Yjs](https://github.com/y-js/yjs) (Server)
+# (LEGACY) Websockets Connector for [Yjs](https://github.com/y-js/yjs) (Server) 
+> Note: this is an outdated repository which is not compatible with y-websocket or Yjs>=v13
 
 *y-websockets-server* is the connection point for *y-websockets-client*. It saves the shared data (using the [memory](https://github.com/y-js/y-memory) or the [leveldb](https://github.com/y-js/y-leveldb) database adapter), and distributes it efficiently to all connected clients.
 
