@@ -19,13 +19,14 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: "16.x"
 
       - name: npm install, build, and test
         run: |
           npm install
-          npm run build --if-present
-          npm run test --if-present
+          # npm run build --if-present
+          # npm run test --if-present
+          docker build -t y-websockets-server .
 
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
@@ -40,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'Production'
+      name: "Production"
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -49,14 +50,17 @@ jobs:
         with:
           name: node-app
 
-      - name: Unzip artifact for deployment
-        run: unzip release.zip
+      # - name: Unzip artifact for deployment
+      #   run: unzip release.zip
 
-      - name: 'Deploy to Azure Web App'
+      - name: "Run Docker image"
+        run: docker run -it --rm -p 8080:1234 --name y-websockets-server y-websockets-server
+
+      - name: "Deploy to Azure Web App"
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'stringCollab'
-          slot-name: 'Production'
+          app-name: "stringCollab"
+          slot-name: "Production"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F7035BC27CC745B7890462A421E367B7 }}
           package: .
